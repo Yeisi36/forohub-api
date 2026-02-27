@@ -1,10 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+#  ForoHub API REST
+
+API REST para un foro de preguntas y respuestas, desarrollada con Spring Boot y Java 25.
+
+##  Tecnologías utilizadas
+
+- Java 25
+- Spring Boot 4.0.3
+- Spring Security + JWT
+- PostgreSQL
+- Hibernate / JPA
+- Lombok
+- Maven
+
+##  Endpoints disponibles
+
+###  Públicos (sin token)
+| Método | Endpoint | Descripción |
+|--------|----------|-------------|
+| POST | `/usuarios/registro` | Registrar nuevo usuario |
+| POST | `/auth` | Login - obtener token JWT |
+| GET | `/topicos` | Listar todos los tópicos |
+| GET | `/topicos/{id}` | Ver un tópico específico |
+| GET | `/topicos/{id}/respuestas` | Ver respuestas de un tópico |
+
+###  Protegidos (requieren token JWT)
+| Método | Endpoint | Descripción |
+|--------|----------|-------------|
+| POST | `/topicos` | Crear nuevo tópico |
+| PUT | `/topicos/{id}` | Editar un tópico |
+| DELETE | `/topicos/{id}` | Eliminar un tópico |
+| POST | `/topicos/{id}/respuestas` | Responder un tópico |
+
+##  Autenticación
+
+La API usa JWT. Para acceder a endpoints protegidos:
+
+1. Haz login en `POST /auth` con tu email y contraseña
+2. Copia el token que recibes
+3. En cada request protegida agrega el header:
+```
+Authorization: Bearer TU_TOKEN_AQUI
+```
+
+##  Cómo ejecutar el proyecto
+
+### Requisitos
+- Java 25
+- PostgreSQL
+- Maven
+
+### Pasos
+1. Clona el repositorio
+```bash
+git clone https://github.com/Yeisi36/forohub-api.git
+```
+2. Crea la base de datos en PostgreSQL
+```sql
+CREATE DATABASE forohub_db;
+```
+3. Configura tu `application.properties` con tu contraseña de PostgreSQL
+4. Ejecuta con IntelliJ o con:
+```bash
+./mvnw spring-boot:run
+```
+
+##  Desarrollado por
+Yeisi — Curso Beca Tecnología y Programación.
